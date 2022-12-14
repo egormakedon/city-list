@@ -1,0 +1,25 @@
+spring:
+    datasource:
+        url: jdbc:postgresql://${POSTGRES_HOST}/${POSTGRES_DB}
+        username: ${POSTGRES_USERNAME}
+        password: ${POSTGRES_PASSWORD}
+    jpa:
+        generate-ddl: false
+        hibernate:
+            ddl-auto: validate
+            naming.physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        properties:
+            hibernate.cache:
+                use_second_level_cache: true
+                region.factory_class: org.hibernate.cache.ehcache.EhCacheRegionFactory
+                use_query_cache: true
+        show-sql: false
+
+logging:
+    config: classpath:log4j2.xml
+    level:
+        root: INFO
+
+server:
+    port: 8080
+    servlet.session.timeout: 10m
