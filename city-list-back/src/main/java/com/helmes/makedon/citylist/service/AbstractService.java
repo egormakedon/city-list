@@ -3,6 +3,8 @@ package com.helmes.makedon.citylist.service;
 import com.helmes.makedon.citylist.domain.BaseBean;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -16,7 +18,7 @@ import java.util.Optional;
  */
 @RequiredArgsConstructor
 @Slf4j
-public abstract class AbstractService<ENTITY extends BaseBean> implements CrudService<ENTITY> {
+public abstract class AbstractService<ENTITY extends BaseBean> implements CrudService<ENTITY>, PagingService<ENTITY> {
 	private final JpaRepository<ENTITY, Long> repository;
 
 	@Transactional
@@ -70,5 +72,11 @@ public abstract class AbstractService<ENTITY extends BaseBean> implements CrudSe
 	public void deleteAll() {
 		log.debug("deleteAll");
 		repository.deleteAllInBatch();
+	}
+
+	@Override
+	public Page<ENTITY> getAll(Pageable pageable) {
+		log.debug("getAll: {}", pageable);
+		return repository.findAll(pageable);
 	}
 }
