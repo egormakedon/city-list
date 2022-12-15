@@ -25,10 +25,14 @@
               "src/assets"
             ],
             "styles": [
+              "reset-css/reset.css",
+              "bootstrap/dist/css/bootstrap.css",
               "@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "bootstrap/dist/js/bootstrap.js"
+            ]
           },
           "configurations": {
             "production": {
