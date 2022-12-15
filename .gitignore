@@ -13,6 +13,8 @@
 *.tar.gz
 *.rar
 
+.angular/
+
 bin/
 out/
 target/
