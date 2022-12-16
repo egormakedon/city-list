@@ -1,34 +1,25 @@
 import { City } from './city';
 
 export class CityPage {
-  private _content: City[] | undefined;
-  private _totalPages: number | undefined;
-  private _totalElements: number | undefined;
+  private _content: City[] = [];
+  private _totalElements: number = 0;
 
   constructor() {
   }
 
-  get content(): City[] | undefined {
+  get content(): City[] {
     return this._content;
   }
 
-  set content(value: City[] | undefined) {
+  set content(value: City[]) {
     this._content = value;
   }
 
-  get totalPages(): number | undefined {
-    return this._totalPages;
-  }
-
-  set totalPages(value: number | undefined) {
-    this._totalPages = value;
-  }
-
-  get totalElements(): number | undefined {
+  get totalElements(): number {
     return this._totalElements;
   }
 
-  set totalElements(value: number | undefined) {
+  set totalElements(value: number) {
     this._totalElements = value;
   }
 }
