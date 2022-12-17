@@ -19,7 +19,7 @@ export class PaginatorComponent {
 
   @Output() page = new EventEmitter<PageEvent>();
 
-  handlePageEvent(e: PageEvent) {
+  handlePageEvent(e: PageEvent): void {
     this.page.emit(e);
   }
 }

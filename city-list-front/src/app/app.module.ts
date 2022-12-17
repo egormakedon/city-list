@@ -6,8 +6,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CityCardComponent } from './city-card/city-card.component';
-import { PaginatorComponent } from './paginator/paginator.component';
+import { CityCardComponent } from './component/city-card/city-card.component';
+import { PaginatorComponent } from './component/paginator/paginator.component';
 
 @NgModule({
   declarations: [

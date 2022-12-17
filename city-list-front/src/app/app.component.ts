@@ -1,14 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
-import { City } from './city/city';
-import { CityService } from './city/city.service';
+import { City } from './domain/city';
+import { CityService } from './service/city.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   length: number = 0;
   pageSize: number = 10;
   pageIndex: number = 0;
@@ -17,18 +17,18 @@ export class AppComponent {
   constructor(private cityService: CityService) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.getAllCities();
   }
 
-  handlePageEvent(e: PageEvent) {
+  handlePageEvent(e: PageEvent): void {
     this.length = e.length;
     this.pageSize = e.pageSize;
     this.pageIndex = e.pageIndex;
     this.getAllCities();
   }
 
-  private getAllCities() {
+  private getAllCities(): void {
     this.cityService.getAllCities(this.pageIndex, this.pageSize).subscribe(data => {
       this.cities = data.content;
       this.length = data.totalElements;

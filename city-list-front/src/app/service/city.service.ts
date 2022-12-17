@@ -1,11 +1,11 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { apiCities } from '../../api/api.cities';
-import { apiPaging } from '../../api/api.paging';
+import { apiCities } from '../api/api.cities';
+import { apiPaging } from '../api/api.paging';
 import { environment } from '../../environments/environment';
-import { City } from './city';
-import { CityPage } from './city.page';
+import { City } from '../domain/city';
+import { CityPage } from '../domain/city.page';
 
 @Injectable({
   providedIn: 'root'
