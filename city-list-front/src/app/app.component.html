@@ -9,6 +9,12 @@
 	</div>
 </div>
 
+<div class="container-fluid mt-5" *ngIf="loading">
+	<div class="d-flex justify-content-center">
+		<p class="loading">Loading...</p>
+	</div>
+</div>
+
 <div class="container-fluid mt-5">
 	<div class="row row-cols-1 row-cols-5 g-4">
 		<div class="col d-flex justify-content-center" *ngFor="let city of cities">

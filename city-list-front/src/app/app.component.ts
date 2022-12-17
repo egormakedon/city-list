@@ -12,6 +12,7 @@ export class AppComponent implements OnInit {
   length: number = 0;
   pageSize: number = 10;
   pageIndex: number = 0;
+  loading: boolean = false;
   cities: City[] = [];
 
   constructor(private cityService: CityService) {
@@ -29,9 +30,11 @@ export class AppComponent implements OnInit {
   }
 
   private getAllCities(): void {
+    this.loading = true;
     this.cityService.getAllCities(this.pageIndex, this.pageSize).subscribe(data => {
       this.cities = data.content;
       this.length = data.totalElements;
+      this.loading = false;
     });
   }
 }
