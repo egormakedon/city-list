@@ -9,6 +9,12 @@
 	</div>
 </div>
 
+<div class="container mt-2 w-25">
+	<app-city-search
+					(name)="handleSearchName($event)">
+	</app-city-search>
+</div>
+
 <div class="container-fluid mt-5" *ngIf="loading">
 	<div class="d-flex justify-content-center">
 		<p class="loading">Loading...</p>

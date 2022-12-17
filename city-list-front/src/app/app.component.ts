@@ -14,6 +14,7 @@ export class AppComponent implements OnInit {
   pageIndex: number = 0;
   loading: boolean = false;
   cities: City[] = [];
+  searchName: string = '';
 
   constructor(private cityService: CityService) {
   }
@@ -26,7 +27,14 @@ export class AppComponent implements OnInit {
     this.length = e.length;
     this.pageSize = e.pageSize;
     this.pageIndex = e.pageIndex;
-    this.getAllCities();
+    this.getAllOrSearch();
+  }
+
+  handleSearchName(name: string): void {
+    this.length = 0;
+    this.pageIndex = 0;
+    this.searchName = name.trim().toLowerCase();
+    this.getAllOrSearch();
   }
 
   private getAllCities(): void {
@@ -36,5 +44,22 @@ export class AppComponent implements OnInit {
       this.length = data.totalElements;
       this.loading = false;
     });
+  }
+
+  private searchCities(): void {
+    this.loading = true;
+    this.cityService.searchCities(this.searchName, this.pageIndex, this.pageSize).subscribe(data => {
+      this.cities = data.content;
+      this.length = data.totalElements;
+      this.loading = false;
+    });
+  }
+
+  private getAllOrSearch(): void {
+    if (this.searchName === '') {
+      this.getAllCities();
+    } else {
+      this.searchCities();
+    }
   }
 }
