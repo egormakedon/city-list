@@ -20,6 +20,7 @@ import javax.validation.Valid;
  */
 @RestController
 @RequestMapping("/api/v1/cities")
+@CrossOrigin(origins = {"http://localhost:4200"})
 public class CityController {
 	@Autowired
 	private CityService cityService;
