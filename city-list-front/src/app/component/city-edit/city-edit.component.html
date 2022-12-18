@@ -1,0 +1,60 @@
+<div class="container w-25 mt-4">
+	<form #cityForm="ngForm" (ngSubmit)="onSubmit()">
+		<div class="row mb-3">
+			<label class="col-sm-2 col-form-label" for="cityIdInput">ID</label>
+			<div class="col-sm-10">
+				<input
+					class="form-control-plaintext"
+					type="text"
+					name="id"
+					id="cityIdInput"
+					value="{{ '#' + city.id }}"
+					readonly>
+			</div>
+		</div>
+		<div class="row mb-3">
+			<label class="col-sm-2 col-form-label" for="cityNameInput">Name</label>
+			<div class="col-sm-10">
+				<input
+					class="form-control"
+					[ngClass]="name.valid ? 'is-valid' : 'is-invalid'"
+					type="text"
+					name="name"
+					id="cityNameInput"
+					placeholder="Enter city name"
+					[(ngModel)]="city.name"
+					required #name="ngModel">
+				<div class="invalid-feedback">Name is required!</div>
+			</div>
+		</div>
+		<div class="row mb-3">
+			<label class="col-sm-2 col-form-label" for="cityPhotoUrlInput">PH Url</label>
+			<div class="col-sm-10">
+				<input
+					class="form-control"
+					[ngClass]="photoUrl.valid ? 'is-valid' : 'is-invalid'"
+					type="text"
+					name="photoUrl"
+					id="cityPhotoUrlInput"
+					placeholder="Enter city photo url"
+					[(ngModel)]="city.photoUrl"
+					required #photoUrl="ngModel">
+				<div class="invalid-feedback">Photo Url is required!</div>
+			</div>
+		</div>
+		<div class="row mb-3">
+			<img class="col" src="{{ city.photoUrl }}" alt="{{ city.name + ' #' + city.id }}">
+		</div>
+		<div class="row mb-3">
+			<button
+					class="btn btn-primary col"
+					type="submit"
+					[disabled]="cityForm.form.invalid || submitted">
+				Submit
+			</button>
+		</div>
+	</form>
+	<div class="row mb-3">
+		<button class="btn btn-success col" type="button" (click)="navigateToMain()">Back to the main page</button>
+	</div>
+</div>
