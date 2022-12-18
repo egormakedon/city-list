@@ -36,8 +36,13 @@ export class CityService {
     return this.http.get<CityPage>(this.citiesSearchUrl, {params: queryParams});
   }
 
-  public updateCity(city: City): Observable<City> {
-    const url = `${this.citiesUrl}/${city.id}`;
+  public updateCity(id: number | undefined, city: City): Observable<City> {
+    const url = `${this.citiesUrl}/${id}`;
     return this.http.put<City>(url, city);
+  }
+
+  public getCity(id: number): Observable<City> {
+    const url = `${this.citiesUrl}/${id}`;
+    return this.http.get<City>(url);
   }
 }

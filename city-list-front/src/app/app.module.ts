@@ -10,13 +10,17 @@ import { AppComponent } from './app.component';
 import { CityCardComponent } from './component/city-card/city-card.component';
 import { PaginatorComponent } from './component/paginator/paginator.component';
 import { CitySearchComponent } from './component/city-search/city-search.component';
+import { MainComponent } from './component/main/main.component';
+import { CityEditComponent } from './component/city-edit/city-edit.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PaginatorComponent,
     CityCardComponent,
-    CitySearchComponent
+    CitySearchComponent,
+    MainComponent,
+    CityEditComponent
   ],
   imports: [
     BrowserModule,
