@@ -13,9 +13,12 @@
 *.tar.gz
 *.rar
 
+.angular/
+
 bin/
 out/
 target/
 build/
 node_modules/
 dist/
+logs/

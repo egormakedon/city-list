@@ -1,0 +1,74 @@
+version: '3.9'
+services:
+    postgres:
+        image: postgres:14.1-alpine
+        container_name: postgres
+        ports:
+            - 5432:5432
+        volumes:
+            - pg_data:/var/lib/postgresql/data
+            - shared_volume:/city/data
+        environment:
+            POSTGRES_PASSWORD: postgres
+            POSTGRES_USER: postgres
+            POSTGRES_DB: citylistdb
+            POSTGRES_INITDB_ARGS: --auth-host=scram-sha-256 --encoding=UTF-8 --locale=ru_RU.UTF-8
+            POSTGRES_HOST_AUTH_METHOD: scram-sha-256
+            PGDATA: /var/lib/postgresql/data
+            TZ: Europe/Warsaw
+            LANG: ru_RU.UTF-8
+            LANGUAGE: ru
+        restart: always
+    pgadmin:
+        image: dpage/pgadmin4:6.2
+        container_name: pgadmin
+        ports:
+            - 8000:80
+        environment:
+            PGADMIN_DEFAULT_EMAIL: admin@domain.com
+            PGADMIN_DEFAULT_PASSWORD: admin
+            TZ: Europe/Warsaw
+            LANG: ru_RU.UTF-8
+            LANGUAGE: ru
+        restart: always
+        depends_on:
+            - postgres
+    city-list-back:
+        build: ./city-list-back
+        image: city-list-back:latest
+        container_name: city-list-back
+        ports:
+            - 8080:8080
+        volumes:
+            - ./logs:/logs
+            - shared_volume:/opt/app/data
+        environment:
+            POSTGRES_HOST: postgres
+            POSTGRES_DB: citylistdb
+            POSTGRES_USERNAME: postgres
+            POSTGRES_PASSWORD: postgres
+            CITY_DATA: /city/data
+            SPRING_PROFILES_ACTIVE: prod
+            CATALINA_OPTS: -Xms512m -Xmx2048m -XX:MaxPermSize=256m -server
+            TZ: Europe/Warsaw
+            LANG: ru_RU.UTF-8
+            LANGUAGE: ru
+        restart: always
+        depends_on:
+            - postgres
+    city-list-front:
+        build: ./city-list-front
+        image: city-list-front:latest
+        container_name: city-list-front
+        ports:
+            - 4200:80
+        environment:
+            TZ: Europe/Warsaw
+            LANG: ru_RU.UTF-8
+            LANGUAGE: ru
+        restart: always
+        depends_on:
+            - city-list-back
+volumes:
+    pg_data:
+    shared_volume:

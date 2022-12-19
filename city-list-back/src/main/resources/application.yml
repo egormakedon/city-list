@@ -1,0 +1,28 @@
+spring:
+    datasource:
+        url: jdbc:postgresql://localhost/citylistdb
+        username: postgres
+        password: postgres
+    jpa:
+        generate-ddl: false
+        hibernate:
+            ddl-auto: validate
+            naming.physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        properties:
+            hibernate.cache:
+                use_second_level_cache: true
+                region.factory_class: org.hibernate.cache.ehcache.EhCacheRegionFactory
+                use_query_cache: true
+        show-sql: false
+    flyway:
+        placeholders:
+            data: /city/data
+
+logging:
+    config: classpath:log4j2.xml
+    level:
+        root: INFO
+
+server:
+    port: 8080
+    servlet.session.timeout: 30m
