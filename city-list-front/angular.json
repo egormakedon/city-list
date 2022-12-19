@@ -75,6 +75,10 @@
             },
             "development": {
               "browserTarget": "city-list-front:build:development"
+            },
+            "options": {
+              "browserTarget": "city-list-front:build",
+              "proxyConfig": "src/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"

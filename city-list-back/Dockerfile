@@ -1,16 +1,18 @@
 FROM maven:3.8.3-openjdk-11-slim AS build
 
-WORKDIR /home/city-list/
+WORKDIR /app
 
-COPY ./ /home/city-list/
+COPY . /app
 
 RUN mvn package
 
 FROM adoptopenjdk:11-jre-hotspot
 
-RUN mkdir /opt/app
+RUN mkdir -p /opt/app/data
 
-COPY --from=build /home/city-list/target/city-list.jar /opt/app
+COPY --from=build /app/target/city-list.jar /opt/app
+
+COPY --from=build /app/src/main/resources/db/data /opt/app/data
 
 EXPOSE 8080
 
